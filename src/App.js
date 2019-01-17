@@ -1,41 +1,78 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import './Person/Person.css'
 
 class App extends Component {
   state = {
     persons: [
-      {name: "Isaac", age: 28},
-      {name: "Alannah", age: 24},
-      {name: "Lancelot", age: 4}
-    ]
+      {id:"sodaf",name: "Isaac", age: 28},
+      {id:"asldjkfasdjkln", name: "Alannah", age: 24},
+      {id: "asfsve", name: "Lancelot", age: 4}
+    ],
+    showPersons: false
   }
 
-  switchNameHandler = () => {
+  deletePersonHandler = (index) =>{
+    const persons = [...this.state.persons]
+    persons.splice(index, 1);
+    this.setState({persons: persons});
+  }
+
+  togglePersonsHandler = (event) => {
     
-    this.setState({
-      persons:
-      [{name: "Isaac", age: 28},
-      {name: "Alannah", age: 24},
-      {name: "Lancelot", age: 30}]
+      const doesShow = this.state.showPersons;
+      this.setState({showPersons: !doesShow});
+  
+  }
+  changeNameHandler =(event, id) =>{
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     })
-    
-    //Dont do this
-    //this.state.persons[0].name = "BillyLooWho"  
-    
+    const person = {...this.state.persons[personIndex]};
+    person.name = event.target.value;
+    const persons =[...this.state.persons]
+    persons[personIndex] = person;
+    this.setState({persons: persons});
   }
 
+
+
+  //This is what is rendered to the browser
   render() {
+
+    let persons = null;
+
+  if (this.state.showPersons){
+    persons = (
+      <div className="App">
+        {this.state.persons.map((person, index) => {
+          return( 
+           
+            <Person 
+            name={person.name} 
+            age={person.age}
+            key={person.id}
+            change={(event) => this.changeNameHandler(event, person.id)}
+            click={() => this.deletePersonHandler(index)}/> 
+            
+          )
+        })}
+      </div>
+
+    );
+  }
+
     return (
       <div className="App">
         <h1>React App</h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}> <li>Children Data</li> </Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}> <li>Children Data</li> </Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}> <li>Children Data</li><li>Child data 2</li> </Person>
+        <button onClick={this.togglePersonsHandler} className='Button'>Show Persons</button>
+        {persons}
       </div>
     );
   }
+
+  
 }
 
 export default App;
