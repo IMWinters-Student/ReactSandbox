@@ -22,13 +22,14 @@
 .App-link {
   color: #61dafb;
 }
-
-.Button {
-  border: #282c34;
-  background-color: rgb(247, 242, 235);
-  box-shadow: 0 2px 2px #ccc;
-  padding: 10px;
+.red{
+  color: red;
 }
+.bold{
+  font-weight: bold;
+}
+
+
 
 @keyframes App-logo-spin {
   from {

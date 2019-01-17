@@ -42,6 +42,14 @@ class App extends Component {
   render() {
 
     let persons = null;
+  const style = {
+    backgroundColor: 'green',
+    padding: '10px',
+    border: '1px black',
+    font: 'inherit'
+    
+
+  }  
 
   if (this.state.showPersons){
     persons = (
@@ -59,18 +67,34 @@ class App extends Component {
           )
         })}
       </div>
-
     );
+    style.backgroundColor = 'red';
   }
+
+  const cssClasses = [];
+  if (this.state.persons.length <= 2){
+    cssClasses.push('red')
+  }
+  if (this.state.persons.length <=1){
+    cssClasses.push('bold')
+  }
+
 
     return (
       <div className="App">
         <h1>React App</h1>
-        <button onClick={this.togglePersonsHandler} className='Button'>Show Persons</button>
+        <p className={cssClasses.join(" ")}>It's working!</p>
+        <button
+          style = {style} 
+          onClick={this.togglePersonsHandler} 
+          className='Button'>
+            Toggle Persons
+        </button>
         {persons}
       </div>
     );
   }
+
 
   
 }
