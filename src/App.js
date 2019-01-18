@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person';
-import './Person/Person.css';
+import classes from './App.css';
+import Person from './Person/Person'
+
 
 
 class App extends Component {
@@ -42,11 +42,12 @@ class App extends Component {
   //This is what is rendered to the browser
   render() {
 
-    let persons = null; 
+    let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons){
       persons = (
-        <div className="App">
+        <div className={classes.App}>
           {this.state.persons.map((person, index) => {
             return( 
             <Person 
@@ -61,24 +62,27 @@ class App extends Component {
         }
       </div>
       );
-      
+
+      btnClass = classes.Red; 
     }
+    
 
     const cssClasses = [];
     if (this.state.persons.length <= 2){
-    cssClasses.push('red')
+    cssClasses.push(classes.red)
     }
     if (this.state.persons.length <=1){
-    cssClasses.push('bold')
+    cssClasses.push(classes.bold)
     }
 
 
     return (
       
-      <div className="App">
+      <div className={classes.App}>
         <h1>React App</h1>
-        <p className={cssClasses.join(" ")}>It's working!</p>
-        <button 
+        <p className={classes.Component}>It's working!</p>
+        <button
+          className = {btnClass} 
           onClick={this.togglePersonsHandler} 
           className='Button'>
             Toggle Persons
