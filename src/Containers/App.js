@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from '../Containers/App.css';
 import Person from '../Components/Persons/Person/Person';
 import ErrorBoundry from '../Components/ErrorBoundry/ErrorBoundry';
+import Persons from '../Components/Persons/Persons';
 
 
 
@@ -50,21 +51,10 @@ class App extends Component {
     if (this.state.showPersons){
       persons = (
         <div className={classes.App}>
-          {this.state.persons.map((person, index) => {
-            return(
-            
-            <ErrorBoundry key={person.id}> 
-              <Person 
-                name={person.name} 
-                age={person.age} 
-                change={(event) => this.changeNameHandler(event, person.id)}
-                click={() => this.deletePersonHandler(index)}/>
-            </ErrorBoundry>
-               
-              )
-            }
-          )
-        }
+          <Persons 
+          clicked={this.deletePersonHandler} 
+          persons={this.state.persons} 
+          Changed={this.changeNameHandler} />
       </div>
       );
 
