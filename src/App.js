@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
-import './Person/Person.css'
+import Person from './Person/Person';
+import './Person/Person.css';
+
 
 class App extends Component {
   state = {
@@ -41,57 +42,50 @@ class App extends Component {
   //This is what is rendered to the browser
   render() {
 
-    let persons = null;
-  const style = {
-    backgroundColor: 'green',
-    padding: '10px',
-    border: '1px black',
-    font: 'inherit'
-    
+    let persons = null; 
 
-  }  
-
-  if (this.state.showPersons){
-    persons = (
-      <div className="App">
-        {this.state.persons.map((person, index) => {
-          return( 
-           
+    if (this.state.showPersons){
+      persons = (
+        <div className="App">
+          {this.state.persons.map((person, index) => {
+            return( 
             <Person 
             name={person.name} 
             age={person.age}
             key={person.id}
             change={(event) => this.changeNameHandler(event, person.id)}
-            click={() => this.deletePersonHandler(index)}/> 
-            
+            click={() => this.deletePersonHandler(index)}/>  
+              )
+            }
           )
-        })}
+        }
       </div>
-    );
-    style.backgroundColor = 'red';
-  }
+      );
+      
+    }
 
-  const cssClasses = [];
-  if (this.state.persons.length <= 2){
+    const cssClasses = [];
+    if (this.state.persons.length <= 2){
     cssClasses.push('red')
-  }
-  if (this.state.persons.length <=1){
+    }
+    if (this.state.persons.length <=1){
     cssClasses.push('bold')
-  }
+    }
 
 
     return (
+      
       <div className="App">
         <h1>React App</h1>
         <p className={cssClasses.join(" ")}>It's working!</p>
-        <button
-          style = {style} 
+        <button 
           onClick={this.togglePersonsHandler} 
           className='Button'>
             Toggle Persons
         </button>
         {persons}
       </div>
+      
     );
   }
 
